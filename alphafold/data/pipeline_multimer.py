@@ -175,7 +175,8 @@ class DataPipeline:
                jackhmmer_binary_path: str,
                uniprot_database_path: str,
                max_uniprot_hits: int = 50000,
-               use_precomputed_msas: bool = False):
+               use_precomputed_msas: bool = False,
+               n_cpu: int = 32):
     """Initializes the data pipeline.
 
     Args:
@@ -187,6 +188,7 @@ class DataPipeline:
       max_uniprot_hits: The maximum number of hits to return from uniprot.
       use_precomputed_msas: Whether to use pre-existing MSAs; see run_alphafold.
     """
+    self.n_cpu = n_cpu
     self._monomer_data_pipeline = monomer_data_pipeline
     self._uniprot_msa_runner = jackhmmer.Jackhmmer(
         binary_path=jackhmmer_binary_path,
